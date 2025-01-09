@@ -1,25 +1,30 @@
 #!/bin/bash
 
-while true; do
+# Check for quit keyword func
+check_quit() {
+    local input=$1
+     if [[ "$pInput" = "exit" || "$pInput" = "q" ]]; then 
+        echo "Exiting program..."
+        exit 0
+    fi
+}
 
+while true; do
+    # Get primary input
     echo "\nEnter primary multiple ( type 'exit' to quit )" 
     read pInput
-
-    if [ "$pInput" = "exit" ]; then 
-        echo "Exiting Program"
-        break
-    fi
-
+    check_quit "$pInput"
     echo "You entered primary multiple: $pInput" 
 
+    # Get secondary input
     echo "\nEnter the secondary multiple ( type 'exit' to quit )" 
-    read sinput
+    read sInput
+    check_quit "$sInput"
+    echo "You entered secondary multiple: $sInput" 
 
-    echo "You entered secondary multiple: $sinput" 
-
-    if [ "$sinput" = "exit" ]; then 
-        echo "Exiting program..."
-        break
-    fi
+    # Added second loop for multiplication table
+    for ((i=1; i<=$sInput; i++)); do
+        echo "What is $pInput x $i?"
+    done
 
 done

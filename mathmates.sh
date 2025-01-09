@@ -3,7 +3,7 @@
 # Check for quit keyword func
 check_quit() {
     local input=$1
-     if [[ "$pInput" = "exit" || "$pInput" = "q" ]]; then 
+     if [[ "$input" = "exit" || "$input" = "q" ]]; then 
         echo "Exiting program..."
         exit 0
     fi
@@ -24,7 +24,15 @@ while true; do
 
     # Added second loop for multiplication table
     for ((i=1; i<=$sInput; i++)); do
-        echo "What is $pInput x $i?"
-    done
+        question="$pInput x $i"
+        echo "What is $question?"
+        read ansInput
 
+        correctAns=$(($pInput*$i))
+        if [ $ansInput -eq $correctAns ]; then
+            echo "Correct! The answer to $question is $correctAns."
+        else 
+            echo "Wrong! It is not $ansInput. The answer to $question, is $correctAns."
+        fi
+    done
 done

@@ -13,14 +13,15 @@ check_quit() {
 # Array is [1, 2, 3, 4]
 
 # Shuffle Function
+# After second iteration, array is [1, 4, 3, 2]
 shuffle() {
     local array=("$@")
     local i j temp
-    for ((i=${#array[@]}-1; i>0; i--)); do # i = 3 as array length is 4-1 = 3
-        j=$((RANDOM % (i+1))) # j = 2 , as the modulo operation will return value less then 4, from i + 1 which is 3 + 1. 
-        temp=${array[i]} # temp = 4, as array[3] = 4
-        array[i]=${array[j]} # array[3] = array[2] thus array is now [1, 2, 3, 2]
-        array[j]=$temp # array[2] = 4, thus array is now [1, 4, 3, 2]
+    for ((i=${#array[@]}-1; i>0; i--)); do # i = 1 as array length is 2-1 = 1
+        j=$((RANDOM % (i+1))) # j = 1 ( must be 1 ), as the modulo operation will return value less then 2, from i + 1 which is 1 + 1 = 2
+        temp=${array[i]} # temp = 4, as array[1] = 4
+        array[i]=${array[j]} # array[1] = array[1] thus array is now [1, 4, 3, 2]
+        array[j]=$temp # array[1] = 4, thus array is now [1, 4, 3, 2]
     done
     printf "%s\n" "${array[@]}"
 }

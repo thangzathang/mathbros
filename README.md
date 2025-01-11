@@ -50,6 +50,12 @@ shuffle() {
 }
 ```
 
+Where i = 3 and j = 2
+
+`temp = 4, as temp=${array[i]} = array[2] = 3`
+`array[i]=${array[j]} => array[3] = array[2] => 3, thus array is now [1, 2, 3, 3]`
+`array[j]=$temp => array[2]=4 => thus array is now [ 1, 2, 4, 3 ]`
+
 Second iteration of the shuffle:
 
 ```
@@ -71,6 +77,14 @@ shuffle() {
 }
 ```
 
+Array before iteration is [ 1, 2, 4, 3 ]
+
+Where i = 2 and j = 1
+
+`temp = 4, as temp=${array[i]} = array[2] = 4`
+`array[i]=${array[j]} => array[2] = array[1] => 3, thus array is now [1, 2, 2, 3]`
+`array[j]=$temp => array[1]=4 => thus array is now [ 1, 4, 2, 3 ]`
+
 Third iteration of the shuffle:
 
 ```
@@ -88,6 +102,14 @@ shuffle() {
     printf "%s\n" "${array[@]}"
 }
 ```
+
+Array before iteration is [1, 4, 2, 3]
+
+Where i = 1 and j = 0
+
+`temp = 4, as temp=${array[i]} = array[1] = 4`
+`array[i]=${array[j]} => array[1] = array[0] => 1, thus array is now [1, 1, 2, 3]`
+`array[j]=$temp => array[0]=4 => thus array is now [ 4, 1, 2, 3 ]`
 
 Final array state after all iterations: [4, 1, 2, 3]
 
